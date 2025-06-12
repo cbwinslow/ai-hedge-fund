@@ -142,8 +142,20 @@ You can also specify a `--ollama` flag to run the backtester using local LLMs.
 poetry run python src/backtester.py --ticker AAPL,MSFT,NVDA --ollama
 ```
 
+### Running the Web API
 
-## Project Structure 
+Start the FastAPI server to interact with the hedge fund programmatically:
+
+```bash
+poetry run uvicorn webapp.main:app --reload
+```
+
+The API exposes endpoints for fetching price data, placing mock trades and
+running backtests. Visit `http://localhost:8000/docs` for interactive
+documentation once the server is running.
+
+
+## Project Structure
 ```
 ai-hedge-fund/
 ├── src/
