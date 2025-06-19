@@ -150,9 +150,11 @@ Start the FastAPI server to interact with the hedge fund programmatically:
 poetry run uvicorn webapp.main:app --reload
 ```
 
-The API exposes endpoints for fetching price data, placing mock trades and
-running backtests. Visit `http://localhost:8000/docs` for interactive
-documentation once the server is running.
+The API exposes endpoints for fetching price data across asset classes
+(stocks, crypto, commodities and bonds), managing instruments, placing mock
+trades and running backtests. A background job keeps recent prices updated.
+Visit `http://localhost:8000/docs` for interactive documentation once the
+server is running.
 
 
 ## Project Structure
