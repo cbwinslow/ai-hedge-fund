@@ -20,7 +20,19 @@
     requirements: "{{ openbb_install_path }}/requirements.txt"
     virtualenv: "{{ openbb_install_path }}/venv"
     virtualenv_python: python3
+
+- name: Check if requirements.txt exists
+  ansible.builtin.stat:
+    path: "{{ openbb_install_path }}/requirements.txt"
+  register: requirements_file
+
+- name: Install OpenBB dependencies
+  ansible.builtin.pip:
+    requirements: "{{ openbb_install_path }}/requirements.txt"
+    virtualenv: "{{ openbb_install_path }}/venv"
+    virtualenv_python: python3
   become: true
+  when: requirements_file.stat.exists
 
 - name: Install OpenBB package
   ansible.builtin.pip:
