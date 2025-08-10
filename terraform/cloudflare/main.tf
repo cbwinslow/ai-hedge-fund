@@ -15,4 +15,13 @@ resource "cloudflare_record" "openbb" {
   type    = var.record_type
   ttl     = 3600
   proxied = true
+  ttl     = var.record_ttl
+  proxied = true
+}
+
+
+variable "record_ttl" {
+  description = "The TTL value for the DNS record."
+  type        = number
+  default     = 3600
 }
