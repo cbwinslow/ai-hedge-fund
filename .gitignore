@@ -46,3 +46,8 @@ Thumbs.db
 
 # Txt files
 *.txt
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/

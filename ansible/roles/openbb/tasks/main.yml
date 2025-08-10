@@ -1,0 +1,44 @@
+---
+- name: Ensure system packages are installed
+  ansible.builtin.package:
+    name:
+      - git
+      - python3
+      - python3-pip
+    state: present
+  become: true
+
+- name: Clone OpenBB repository
+  ansible.builtin.git:
+    repo: "{{ openbb_repo }}"
+    dest: "{{ openbb_install_path }}"
+    version: "{{ openbb_branch }}"
+  become: true
+
+- name: Install OpenBB dependencies
+  ansible.builtin.pip:
+    requirements: "{{ openbb_install_path }}/requirements.txt"
+    virtualenv: "{{ openbb_install_path }}/venv"
+    virtualenv_python: python3
+
+- name: Check if requirements.txt exists
+  ansible.builtin.stat:
+    path: "{{ openbb_install_path }}/requirements.txt"
+  register: requirements_file
+
+- name: Install OpenBB dependencies
+  ansible.builtin.pip:
+    requirements: "{{ openbb_install_path }}/requirements.txt"
+    virtualenv: "{{ openbb_install_path }}/venv"
+    virtualenv_python: python3
+  become: true
+  when: requirements_file.stat.exists
+
+- name: Install OpenBB package
+  ansible.builtin.pip:
+    chdir: "{{ openbb_install_path }}"
+    editable: true
+    name: .
+    virtualenv: "{{ openbb_install_path }}/venv"
+    virtualenv_python: python3
+  become: true
