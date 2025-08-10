@@ -1,0 +1,4 @@
+---
+openbb_repo: "https://github.com/OpenBB-finance/OpenBBTerminal.git"
+openbb_branch: "main"
+openbb_install_path: "/opt/openbb"

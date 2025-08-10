@@ -1,0 +1,6 @@
+---
+- name: Install OpenBB Terminal
+  hosts: all
+  become: true
+  roles:
+    - openbb
